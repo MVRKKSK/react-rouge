@@ -1,11 +1,13 @@
 import React, { useRef, useEffect, useState } from 'react'
 import Inputmanager from './InputManager';
 import Player from './Player';
+import World from './World';
 
 const Reactrogue = ({ width, height, tilesize }) => {
     let inputManager = new Inputmanager();
     const canvasRef = useRef();
     const [player, setPlayer] = useState(new Player(1 , 2 , tilesize))
+    const [world, setWorld] = useState(new World(width , height , tilesize))
     const handleInput = (action, data) => {
         console.log(`handle input : ${action}: ${JSON.stringify(data)}`)
         let newPlayer = new Player();
@@ -26,6 +28,7 @@ const Reactrogue = ({ width, height, tilesize }) => {
         console.log("hello iam using a game")
         const ctx = canvasRef.current.getContext("2d");
         ctx.clearRect(0, 0, width * tilesize, height * tilesize);
+        world.draw(ctx);
         player.draw(ctx);
 
 
@@ -37,4 +40,4 @@ const Reactrogue = ({ width, height, tilesize }) => {
     )
 }
 
-export default Reactrogue
+export default Reactrogue;
